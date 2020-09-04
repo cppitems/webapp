@@ -1,0 +1,19 @@
+<mat-card class="result">
+    <mat-card-content>
+      <h2 class="example-h2">Useroptions</h2>
+      
+      <mat-slider
+      class="example-margin"
+      [disabled]="disabled"
+      [invert]="invert"
+      [max]="max"
+      [min]="min"
+      [step]="step"
+      [thumbLabel]="thumbLabel"
+      [(ngModel)]="cppitemsService.showStatus"
+      [vertical]="vertical">
+  </mat-slider>
+  Show items (status)
+    </mat-card-content>
+  </mat-card>
+

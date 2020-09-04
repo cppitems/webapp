@@ -1,27 +1,29 @@
-# Cppitems
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.1.0.
+## serve local
 
-## Development server
+```bash
+ng serve
+ng serve --host 0.0.0.0 --disable-host-check # access via http://localhostORdomain:4200/#
+```
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## deploy
+```bash
+ng build --prod --base-href "/" # use this for cppitems.github.io
+```
 
-## Code scaffolding
+# polyfills
+```bash
+npm install -D babel-loader @babel/core @babel/preset-env  # https://github.com/babel/babel-loader
+npm install --save-dev babel-plugin-transform-es2015-arrow-functions
+npm install --save-dev babel-plugin-transform-es2015-template-literals
+npm install --save-dev @babel/core @babel/cli
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+```bash
+for file in ./dist/cppitems/*.js ; do \
+    echo $file; \
+    ./node_modules/.bin/babel "$file" --out-file "${file}.babel" --presets @babel/preset-env
+    cp "${file}.babel" "$file"; \
+    rm "${file}.babel"; \
+done;
+```

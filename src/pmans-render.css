@@ -1,0 +1,35 @@
+
+code {
+  font-family: "Ubuntu Mono", monospace;
+  color: #2825ab;
+  font-size: 16px;
+  line-height: 18px;
+}
+pre.pmans-render code {
+  color: #2825ab;
+}
+pre.pmans-render {
+  background-color: #ffffff;
+  padding: 0px;
+  font-size: 100%;
+}
+.pmans-comment {
+  color: #986232;
+}
+pre .pmans-filename {
+  color: black;
+  background-color: #cfcfcf;
+  font-size: 90%;
+}
+pre .pmans-compile {
+  color: grey;
+  background-color: #ebebeb;
+  font-size: 90%;
+}
+.pmans-b {
+  font-weight: bold;
+  color: #c01d24;
+}
+.pmans-f {
+  font-weight: bold;
+}
