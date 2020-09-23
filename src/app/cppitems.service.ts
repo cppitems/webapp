@@ -140,9 +140,9 @@ export class CppitemsService {
       let title = second.match(/^#\s(.*)/);
       // console.log('title: ' + title[1]);
 
-      let third = content.split('\n')[2];
-      let subtitle = third.match(/^##\s(.*)/);
-      // console.log('subtitle: ' + subtitle[1]);      
+      // let third = content.split('\n')[2];
+      // let subtitle = third.match(/^##\s(.*)/);
+      // // console.log('subtitle: ' + subtitle[1]);      
 
       // remove first two line
       let lines = content.split('\n');
@@ -152,7 +152,7 @@ export class CppitemsService {
       newcontent = [newfirst, newcontent].join('\n');
       let render = this.markdown.render(newcontent);
       let route = "/item/"+foldername;
-      return new ItemClass(title[1],subtitle[1],foldername,route,"image",this.baseUrl+foldername,Number(status),render,newcontent)
+      return new ItemClass(title[1],"",foldername,route,"image",this.baseUrl+foldername,Number(status),render,newcontent)
     }
     catch { // if something breaks
       // let status = 11;

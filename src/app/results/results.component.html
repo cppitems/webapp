@@ -20,7 +20,7 @@
             <!-- <ng-container *ngIf="cppitemsService.showStatus >= item.status "> -->
     
         <mat-card style="padding: 5px;"   class="example-card" >
-                <mat-card-title (click) = "goto(item.route)" style="font-size: 20px;" ><a [routerLink]="item.route" style="color: blue">{{item.idx}} {{item.title}}: {{item.subtitle}}</a></mat-card-title>
+                <mat-card-title (click) = "goto(item.route)" style="font-size: 20px;" ><a [routerLink]="item.route" style="color: blue">{{item.idx}} {{item.title}}</a></mat-card-title>
                 <div [innerHTML]="item.escaped"></div>
             <!-- <mat-card-header> -->
             

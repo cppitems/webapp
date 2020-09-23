@@ -7,6 +7,7 @@ code {
 }
 pre.pmans-render code {
   color: #2825ab;
+  display: inline-block;
 }
 pre.pmans-render {
   background-color: #ffffff;
