@@ -1,5 +1,12 @@
 
+
 code {
+  font-family: "Ubuntu Mono", monospace;
+  font-size: 16px;
+  line-height: 18px;
+}
+
+pre.pmans-render code {
   font-family: "Ubuntu Mono", monospace;
   color: #2825ab;
   font-size: 16px;
