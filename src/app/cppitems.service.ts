@@ -69,7 +69,7 @@ export class CppitemsService {
    private baseUrlRaw: string = "https://raw.githubusercontent.com/cppitems/cppitems/master/items/";
    private baseUrl: string = "https://github.com/cppitems/cppitems/tree/master/items/";
   constructor(private http: HttpClient) {
-    this.items.length = 120;
+    // this.items.length = 120;
     this.markdown=md({
       html:         false,        // Enable HTML tags in source
       xhtmlOut:     false,        // Use '/' to close single tags (<br />).
@@ -115,7 +115,7 @@ export class CppitemsService {
         // extract status from first line (and remove line)
         // let render = this.markdown.render(content);
         // this.items.push(new ItemClass(foldername,"image",this.baseUrlRaw+foldername,1,render));
-        this.items[i] = this.prepareMarkdown(foldername,content);
+        this.items.push(this.prepareMarkdown(foldername,content));
         // console.log('makrdown:', content);
         this.sendContentReady();
       }

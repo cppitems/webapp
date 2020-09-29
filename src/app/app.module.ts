@@ -24,6 +24,7 @@ import {MatSliderModule} from '@angular/material/slider';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatListModule} from '@angular/material/list';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { OrderModule } from 'ngx-order-pipe';
 @NgModule({
   declarations: [
     UseroptionsComponent,
@@ -36,6 +37,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ResultsComponent
   ],
   imports: [
+    OrderModule,
     MatListModule,
     MatRadioModule,
     MatSliderModule,

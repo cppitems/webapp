@@ -12,7 +12,7 @@
 
     <!-- <div fxLayout="column" fxLayoutGap="20px" fxLayoutAlign="space-evenly center"> -->
     <!-- <div fxLayout="row wrap" fxLayoutGap="20px grid" fxLayoutAlign="center start"> -->
-        <div *ngFor="let item of cppitemsService.items; let myIndex = index">
+        <div *ngFor="let item of cppitemsService.items | orderBy: 'idx'">
                 <!-- {{item.title}} {{item.status}} -->
             <!-- <mat-card *ngIf="i<5" class="example-card" > -->
                     <ng-container *ngIf="item">

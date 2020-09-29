@@ -28,6 +28,7 @@
     "markdown-it": "^11.0.0",
     "ngx-device-detector": "^2.0.0",
     "ngx-highlightjs": "^4.1.1",
+    "ngx-order-pipe": "^2.1.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
