@@ -1,7 +1,7 @@
 <!-- <p>itemview works!</p> -->
 <div *ngIf="cppitemsService.itemLoaded && !cppitemsService.itemError">
     <div class="markdown-preview" [innerHTML]="item.html"></div>
-    <div class="markdown-preview">Sources on Github: <a target="_blank" href="{{item.codelink}}">{{item.codelink}} </a></div>
+    <!-- <div class="markdown-preview">Sources on Github: <a target="_blank" href="{{item.codelink}}">{{item.codelink}} </a></div> -->
 </div>
 <div *ngIf="!cppitemsService.itemLoaded" class="markdown-preview" innerHTML="Item does not exist">Item {{routeID}} is loading ...</div>
 <div *ngIf="cppitemsService.itemLoaded && cppitemsService.itemError" class="markdown-preview" innerHTML="Item does not exist">Item {{routeID}} does not exist.</div>

@@ -15,6 +15,7 @@
         <div *ngFor="let item of cppitemsService.items; let myIndex = index">
                 <!-- {{item.title}} {{item.status}} -->
             <!-- <mat-card *ngIf="i<5" class="example-card" > -->
+                    <ng-container *ngIf="item">
             <ng-container *ngIf="cppitemsService.showStatus >= item.status ">
     
         <mat-card style="padding: 5px;" class="example-card" >
@@ -28,6 +29,7 @@
             </mat-card-actions> -->
         </mat-card>
         </ng-container>
+    </ng-container>
         </div>
   
     <!-- </div> -->

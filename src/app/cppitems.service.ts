@@ -20,7 +20,7 @@ export interface Item {
 export interface Match {
   idx: string,
   title: string,
-  subtitle: string,  
+  subtitle: string,
   escaped: string;
   route: string;
 }
@@ -29,10 +29,10 @@ class MatchClass implements Match{
   constructor (
     public idx: string,
     public title: string,
-    public subtitle: string,    
+    public subtitle: string,
     public escaped: string,
     public route: string)
-  {}  
+  {}
 }
 
 class ItemClass implements Item {
@@ -65,10 +65,11 @@ export class CppitemsService {
   public find: string ="";
   public matches: Match[] = [];
 
-   private Headers: any = new HttpHeaders();   
+   private Headers: any = new HttpHeaders();
    private baseUrlRaw: string = "https://raw.githubusercontent.com/cppitems/cppitems/master/items/";
    private baseUrl: string = "https://github.com/cppitems/cppitems/tree/master/items/";
   constructor(private http: HttpClient) {
+    this.items.length = 120;
     this.markdown=md({
       html:         false,        // Enable HTML tags in source
       xhtmlOut:     false,        // Use '/' to close single tags (<br />).
@@ -77,17 +78,17 @@ export class CppitemsService {
       langPrefix:   'language-',  // CSS language prefix for fenced blocks. Can be
                                   // useful for external highlighters.
       linkify:      true,        // Autoconvert URL-like text to links
-    
+
       // Enable some language-neutral replacement + quotes beautification
       typographer:  false,
-    
+
       // Double + single quotes replacement pairs, when typographer enabled,
       // and smartquotes on. Could be either a String or an Array.
       //
       // For example, you can use '«»„“' for Russian, '„“‚‘' for German,
       // and ['«\xA0', '\xA0»', '‹\xA0', '\xA0›'] for French (including nbsp).
       quotes: '“”‘’',
-    
+
       // Highlighter function. Should return escaped HTML,
       // or '' if the source string is not changed and should be escaped externally.
       // If result starts with <pre... internal wrapper is skipped.
@@ -104,9 +105,9 @@ export class CppitemsService {
         return '<pre class="hljs"><code><div>' + this.markdown.utils.escapeHtml(str) + '</div></code></pre>';
     }
     });
-    
-  
-    for(let i=0;i!=100;++i){
+
+
+    for(let i=0;i!=120;++i){
       let foldername = String(i).padStart(3, '0');
       this.getMarkdownItem(foldername).subscribe(
         content => {
@@ -114,7 +115,7 @@ export class CppitemsService {
         // extract status from first line (and remove line)
         // let render = this.markdown.render(content);
         // this.items.push(new ItemClass(foldername,"image",this.baseUrlRaw+foldername,1,render));
-        this.items.push(this.prepareMarkdown(foldername,content));
+        this.items[i] = this.prepareMarkdown(foldername,content);
         // console.log('makrdown:', content);
         this.sendContentReady();
       }
@@ -126,7 +127,7 @@ export class CppitemsService {
   private getStatus( content: string){
     let first = content.split('\n')[0];
     let status = first.match(/^(\d+).*/);
-    // console.log('status: ' + status[1]);    
+    // console.log('status: ' + status[1]);
     return status !== null ? Number(status[1]) : 11;
   }
 
@@ -134,7 +135,7 @@ export class CppitemsService {
     try{  // extract some implicit properties
 
       let status = this.getStatus(content)
-      // console.log('status: ' + status[1]);      
+      // console.log('status: ' + status[1]);
 
       let second = content.split('\n')[1];
       let title = second.match(/^#\s(.*)/);
@@ -142,7 +143,7 @@ export class CppitemsService {
 
       // let third = content.split('\n')[2];
       // let subtitle = third.match(/^##\s(.*)/);
-      // // console.log('subtitle: ' + subtitle[1]);      
+      // // console.log('subtitle: ' + subtitle[1]);
 
       // remove first two line
       let lines = content.split('\n');
@@ -163,7 +164,7 @@ export class CppitemsService {
     }
   }
 
-  
+
   private getMarkdownItem(foldername: any): Observable<any> {
     // console.log('getMarkdownItem:' + foldername);
     return this.http.get(this.baseUrlRaw+foldername+'/item.md',{headers: this.Headers ,responseType: 'text'})
@@ -184,7 +185,7 @@ export class CppitemsService {
   }
   getContentReady(): Observable<any> {
     return this.contentReady.asObservable();
-  }  
+  }
 
   private itemReady = new Subject<any>();
   sendItemReady() {
@@ -205,11 +206,11 @@ export class CppitemsService {
     (err) => {console.log("err1")
     this.itemError = true;
     this.itemLoaded = true;
-    this.sendItemReady();}        
+    this.sendItemReady();}
     // query service to find content
-    );    
+    );
     return this.itemReady.asObservable();
-  }  
+  }
 
 
   private resultsReady = new Subject<any>();
@@ -218,8 +219,8 @@ export class CppitemsService {
     this.resultsReady.next();
   }
   public getResultsReady(value: string): Observable<any> {
-    // process  
-    
+    // process
+
     // clear old matches
     this.matches = [];
     this.find =  value;
@@ -231,13 +232,13 @@ export class CppitemsService {
     this.getContentReady().subscribe(data => {
       this.checkMatch(this.items.length-1);
     });
-    
+
     this.sendResultsReady();
     return this.resultsReady.asObservable();
-  }  
+  }
 
   private checkMatch(idx: number) {
-    // check item for match 
+    // check item for match
     // console.log("checkMatch")
     // modifies results
     let item = this.items[idx];
@@ -249,9 +250,9 @@ export class CppitemsService {
       // find all matches of pattern and construct 'summary'
       let reg = new RegExp(findesc, 'gi');
       let strstart = '<b>'
-      let strend = '</b>'    
+      let strend = '</b>'
       let lenstart = strstart.length;
-      let lenend = strend.length;        
+      let lenend = strend.length;
       escaped = escaped.replace(/\n/g, ' ').replace(reg, strstart+'$&'+strend)
       // extract only regions
 
@@ -260,11 +261,11 @@ export class CppitemsService {
       let n = findesc.length;
       let final = [];
       let start = escaped.indexOf(strstart);
-      let end = escaped.indexOf(strend,start+lenstart); 
+      let end = escaped.indexOf(strend,start+lenstart);
       const maxhits = 20;
       let hits: number = 0;
       let subhits = 0;
-      while (start >= 0 && end >= 0 && hits <= maxhits){   
+      while (start >= 0 && end >= 0 && hits <= maxhits){
         // find gap to next start
         let startn = escaped.indexOf(strstart,end+lenend);
         // while gap < 2*embedd: combine
