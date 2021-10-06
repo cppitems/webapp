@@ -66,8 +66,8 @@ export class CppitemsService {
   public matches: Match[] = [];
 
    private Headers: any = new HttpHeaders();
-   private baseUrlRaw: string = "https://raw.githubusercontent.com/cppitems/cppitems/master/items/";
-   private baseUrl: string = "https://github.com/cppitems/cppitems/tree/master/items/";
+   private baseUrlRaw: string = "https://raw.githubusercontent.com/manstetten/cppitems2020/master/items/";
+   private baseUrl: string = "https://github.com/manstetten/cppitems2020/tree/master/items/";
   constructor(private http: HttpClient) {
     // this.items.length = 120;
     this.markdown=md({
